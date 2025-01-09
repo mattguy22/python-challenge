@@ -57,22 +57,39 @@ greatest_decrease_index = net_change_list.index(greatest_decrease)
 greatest_increase_month = months[greatest_increase_index]
 greatest_decrease_month = months[greatest_decrease_index]
 
+#Generate the output summary
+output = (
+    f"Financial Analysis\n"
+    f"----------------------------------"
+    f"Total Months: {total_months}\n"
+    f"Total: ${total_net}\n"
+    f"Average Change: ${average_change}\n"
+    f"Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase})\n"
+    f"Greatest Decrease in Profits: {greatest_decrease_month} (${greatest_decrease})\n"
+)
+
+#Print the output
+print(output)
+
+#Write the results in a txt file 
+with open(file_to_output, "w") as txt_file:
+    txt_file.write(output)
+
+
 #Prints out all of the desired restults (total_months, total_net, average_chanage, greatest_increase_in_profits, greatest_decrease_in_profits)
-print(financial_analysis)
-print(analysis_break)
-print(f"Total Months: {total_months}")
-print(f"Total: ${total_net}")
-print(f"Average Change: ${average_change}") 
-print(f"Greatest Increase in Profits: {greatest_increase_month} ${greatest_increase}")
-print(f"Greatest Decrease in Profits: {greatest_decrease_month} ${greatest_decrease}")
+# print(financial_analysis)
+# print(analysis_break)
+# print(f"Total Months: {total_months}")
+# print(f"Total: ${total_net}")
+# print(f"Average Change: ${average_change}") 
+# print(f"Greatest Increase in Profits: {greatest_increase_month} ${greatest_increase}")
+# print(f"Greatest Decrease in Profits: {greatest_decrease_month} ${greatest_decrease}")
 
        
 
 
 
-#Exports the code into the txt file 
-# with open(file_to_output, "w") as txt_file:
-#     txt_file.write(output)      
+
        
        
        
