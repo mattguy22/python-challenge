@@ -1,4 +1,8 @@
-# This is the main script to trun the analysis for PyBank
+"""
+Company Financial Record Analysis
+This script reads the financial data from the CSV file, calculates total months, 
+determines the net total amount of profit and losses, and the greatest increase and decrese over the period
+"""
 
 # Import comands 
 import csv
@@ -60,7 +64,7 @@ greatest_decrease_month = months[greatest_decrease_index]
 #Generate the output summary
 output = (
     f"Financial Analysis\n"
-    f"----------------------------------"
+    f"----------------------------------\n"
     f"Total Months: {total_months}\n"
     f"Total: ${total_net}\n"
     f"Average Change: ${average_change}\n"
