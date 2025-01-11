@@ -1,6 +1,13 @@
 # -*- coding: UTF-8 -*-
 """PyPoll Homework Starter File."""
 
+"""
+Modernized Vote - Count Processor
+This script reads the election data from the CSV file, calculates total votes, 
+determines the percentage of votes for each candidate, and identifies the winner, 
+and outputs 
+"""
+
 # Import necessary modules
 import csv
 import os
@@ -9,14 +16,11 @@ import os
 file_to_load = os.path.join("Resources", "election_data.csv")  # Input file path
 file_to_output = os.path.join("analysis", "election_analysis.txt")  # Output file path
 
-# Initialize variables to track the election data
-total_votes = 0  # Track the total number of votes cast
-total_net = 0
-# Define lists and dictionaries to track candidate names and vote counts
-candidates_votes = {}
+# Variable that tracks the total number of votes cast 
+total_votes_count = 0  
 
-# Winning Candidate and Winning Count Tracker
-
+# Dictionary that tracks each candidate's votes 
+candidates_votes_count = {}
 
 # Open the CSV file and process it
 with open(file_to_load) as election_data:
@@ -25,25 +29,45 @@ with open(file_to_load) as election_data:
     # Skip the header row
     header = next(reader)
 
-    # Loop through each row of the dataset and process it
+    # Track the votes that each candidate received 
     for row in reader:
-        total_votes += 1
+        total_votes_count += 1
         candidate = row[2]
-        if candidate in candidates_votes:
-            candidates_votes[candidate] += 1
+        if candidate in candidates_votes_count:
+            candidates_votes_count[candidate] += 1
         else:
-            candidates_votes[candidate] = 1
+            candidates_votes_count[candidate] = 1
 
-winning_candidate = max(candidates_votes, key=candidates_votes.get)
-winning_votes = candidates_votes[winning_candidate]
+# Prepare election results
+election_results = (
+    "Election Results\n"
+    "-------------------------\n"
+    f"Total Votes: {total_votes_count}\n"
+    "-------------------------\n"
+)
 
-print(f'Total Votes: {total_votes}')
+# Add candidate results to the election results
+for candidate, votes in candidates_votes_count.items():
+    vote_percentage = (votes / total_votes_count) * 100
+    candidate_results = f"{candidate}: {vote_percentage:.3f}% ({votes} votes)\n"
+    election_results += candidate_results
 
-for candidate, votes in candidates_votes.items():
-    percentage = (votes / total_votes) * 100
-    print(f'{candidate}: {percentage:.3f}% ({votes} votes)')
+# Determine the winning candidate
+winning_candidate = max(candidates_votes_count, key=candidates_votes_count.get)
 
-print(f'Winner: {winning_candidate}')
+# Add winner to the election results
+election_results += (
+    "-------------------------\n"
+    f"Winner: {winning_candidate}\n"
+    "-------------------------\n"
+)
+
+# Print and save the results
+print(election_results)
+
+with open(file_to_output, "w") as txt_file:
+    txt_file.write(election_results)
+
 
         
         # Print a loading indicator (for large datasets)
